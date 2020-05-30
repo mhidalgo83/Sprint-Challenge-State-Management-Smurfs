@@ -23,10 +23,19 @@ In this challenge, you are to build a Smurfs village utilizing context or Redux 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] What problem does the context API help solve?
+      The Context API helps developers pass data within an application without having to pass that data through the component tree with props. This prevents prop drilling and passing data that is irrelevant to components to get to components that need it.
+
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+      An action is a function that contains an action type, and any data that is associated with that action. A reducer is a pure function that takes in data and returns data in a predictable manner. The Redux store is an object where the state of our application lives, which is why it is known as the single source of truth. Actions are used by the dispatch function in Redux to trigger our reducers to take in data and return state that is updated by that data.
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+      Application state is state that is used throughout the entire application. An example of that would be a user being logged in, and with that certain functionality of the application is accessible. Component level state is state that only one component is concerned with. An example of that would be an input field and it’s associated value.
+
 - [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+      Since we are manipulating state with reducers, and reducers are synchronous, we use Redux Thunk for any tasks we need to perform in our program that are asynchronous, such as API calls. This changes our action creators as we have to account for each state our application could be in (not fetching, is fetching, fetch failure, fetch success).
+
 - [ ] What is your favorite state management system you've learned and this sprint? Please explain why!
+      I think I am leaning towards Redux with hooks at this point. Although it is a lot of setup, I think it is a better way for state to be organized than with Context, and it seems a bit more scalable to me. I do plan on trying Context in some personal projects though to get a bit more practice with it.
 
 ## Project Set Up
 
@@ -64,8 +73,8 @@ Follow these steps to set up your project:
     name: "Brainey",
     age: 200,
     height: "5cm",
-    id: 0
-  }
+    id: 0,
+  },
 ];
 ```
 
@@ -97,14 +106,14 @@ Example of object created in Smurf DB:
     name: "Brainey",
     age: 200,
     height: "5cm",
-    id: 0
+    id: 0,
   },
   {
     name: "Sleepy",
     age: 200,
     height: "5cm",
-    id: 1
-  }
+    id: 1,
+  },
 ];
 ```
 
@@ -157,7 +166,7 @@ output: [
     name: "Sleepy",
     age: 200,
     height: "5cm",
-    id: 1
-  }
+    id: 1,
+  },
 ];
 ```
