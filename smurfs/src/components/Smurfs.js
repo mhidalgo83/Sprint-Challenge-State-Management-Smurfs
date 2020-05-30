@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSmurfs, addSmurf } from "../actions";
+import { getSmurfs, addSmurf, deleteSmurf } from "../actions";
 import Smurf from "./Smurf";
 
 const Smurfs = () => {
@@ -10,14 +10,16 @@ const Smurfs = () => {
     age: "",
     id: Date.now(),
   });
+
   const { smurfs, error, isFetching } = useSelector((state) => state);
+  console.log(smurfs);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("Called");
     dispatch(getSmurfs());
-  }, [smurfs]);
+  }, []);
 
-  console.log(smurfs);
   const handleChange = (e) => {
     e.preventDefault();
     const newSmurf = { ...smurf, [e.target.name]: e.target.value };
@@ -27,13 +29,16 @@ const Smurfs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addSmurf(smurf));
+    setSmurf({ name: "", height: "", age: "" });
+    dispatch(getSmurfs());
   };
 
   return (
     <div>
       <h1>Here are the Smurfs</h1>
+      {error && <p className="error">{error}</p>}
       {smurfs.map((smurf) => (
-        <Smurf key={smurf.id} smurf={smurf} />
+        <Smurf key={smurf.id} smurf={smurf} deleteSmurf={deleteSmurf} />
       ))}
       <h1>Or, add a Smurf to the Smurf Village</h1>
       <form onSubmit={handleSubmit}>
